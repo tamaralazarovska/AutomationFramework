@@ -1,0 +1,17 @@
+[
+  {
+    "name" : "Tamara",
+    "lastName" : "Lazarovska",
+    "phoneNumber" : "+38975223305",
+    "password" : "Pass90word.",
+    "confirmPassword" : "Pass90word."
+  }
+,
+  {
+    "name" : "Scott",
+    "lastName" : "Malek",
+    "phoneNumber" : "+38970987345",
+    "password" : "Password123!",
+    "confirmPassword" : "Password123!"
+  }
+]
