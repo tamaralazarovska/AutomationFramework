@@ -1,52 +1,43 @@
+import com.aventstack.extentreports.Status;
 import jdk.jfr.Description;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pageObjects.CreateAccountPage;
 import testComponents.BaseTest;
-import utils.AbstractComponent;
-import utils.HelpersMethods;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+
+import static testComponents.Listeners.extentTest;
 import static utils.HelpersMethods.generateRandomEmail;
 
 @Listeners(testComponents.Listeners.class)
 public class CreateAccountTest extends BaseTest {
+    WebDriverWait wait;
 
-    @BeforeMethod
-    public void setUp() throws IOException {
-        WebDriver driver = initializeDriver();
-        // Initialize the HomePage object after the browser is set up
-        createAccountPage = new CreateAccountPage(driver);
-        AbstractComponent ac = new AbstractComponent(driver);
-        ac.declineCookies();
-
-    }
-
-    @Parameters({"URL"})
     @Test(priority = 1, dataProvider = "getData")
     @Description("Verify that the account is successfully made")
-    public void createAccountTest(HashMap<String, String> input, String urlname) throws IOException {
+    public void createAccountTest(HashMap<String, String> input) throws IOException {
         String email = generateRandomEmail();
-        try {
-            createAccountPage.createAccount(input.get("name"), input.get("lastName"),
-                    input.get("phoneNumber"), email,
-                    email, input.get("password"),
-                    input.get("confirmPassword"));
-            Assert.assertEquals("Account", createAccountPage.getSuccessfulMessage());
-        } catch (Exception e) {
-            System.out.println("Account creation failed, restarting the browser...");
-            restartBrowser(); // Restart the browser on failure
-
-            // Attempt account creation again or perform any necessary steps
-            createAccountPage.createAccount(input.get("name"), input.get("lastName"),
-                    input.get("phoneNumber"), email,
-                    email, input.get("password"),
-                    input.get("confirmPassword"));
-            Assert.assertEquals("Account", createAccountPage.getSuccessfulMessage());
-        }
-        System.out.println(urlname);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+        WebElement declineCookies = wait.until(ExpectedConditions.elementToBeClickable(By.id("CybotCookiebotDialogBodyButtonDecline")));
+        declineCookies.click();
+        extentTest.get().log(Status.INFO, "Creating account");
+        createAccountPage.createAccount(input.get("userName"), input.get("userLastName"),
+                input.get("userPhoneNumber"), email,
+                email, input.get("userPassword"),
+                input.get("userConfirmPassword"));
+        Assert.assertEquals("Account", createAccountPage.getSuccessfulMessage());
+        if ("Account".equalsIgnoreCase(createAccountPage.getSuccessfulMessage()))
+            extentTest.get().log(Status.PASS, "Account created successfully!");
+        else extentTest.get().log(Status.FAIL, "Account was not created!");
+        restartBrowser(); // Restart the browser on failure
     }
 
     @DataProvider
@@ -55,38 +46,4 @@ public class CreateAccountTest extends BaseTest {
         return new Object[][]{{accountDataList.get(0)}, {accountDataList.get(1)}};
     }
 }
-
-
-
-
-//import org.testng.Assert;
-//import org.testng.annotations.DataProvider;
-//import org.testng.annotations.Test;
-//import testComponents.BaseTest;
-//import utils.HelpersMethods;
-//
-//import java.io.IOException;
-//import java.util.HashMap;
-//import java.util.List;
-//
-//public class CreateAccountTest extends BaseTest {
-//    String newEmail = HelpersMethods.generateRandomEmail();
-////    @Test
-////    public void createAccountTest(){
-////        createAccountPage.createAccount("Tamara","Lazarovska","+38976554321",newEmail,newEmail,"Password123!","Password123!");
-////        Assert.assertEquals("Account", createAccountPage.getSuccessfulMessage());
-////    }
-//@Test(dataProvider = "getData")
-//public void createAccountTest(HashMap<String, String> input) throws IOException {
-//    createAccountPage.createAccount(input.get("name"), input.get("lastName"),input.get("phoneNumber"),
-//            input.get("email"),input.get("confirmEmail"),input.get("password"),input.get("confirmPassword"));
-//    Assert.assertEquals("Account", createAccountPage.getSuccessfulMessage());
-//}
-//
-//    @DataProvider
-//    public Object[][] getData() throws IOException {
-//        List<HashMap<String, String>> accountDataList = loadCreateAccountData(System.getProperty("user.dir") + "\\src\\test\\java\\data\\CreateAccount.json");
-//        return new Object[][]{{accountDataList.get(0)}, {accountDataList.get(1)}};
-//    }
-//}
 

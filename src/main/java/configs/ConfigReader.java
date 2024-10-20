@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-    private Properties properties;
+    public static Properties properties;
 
     // Constructor that takes a config file path
     public ConfigReader(String configFilePath) {
@@ -17,17 +17,17 @@ public class ConfigReader {
         }
     }
 
-    public String getBrowser() {
+    public static String getBrowser() {
         return properties.getProperty("browser", "chrome"); // Default to chrome if not specified
     }
 
-    public boolean isHeadless() {
-        return Boolean.parseBoolean(properties.getProperty("headless", "false")); // Default to false
-    }
-
-
-    public String getBaseURL() {
-        return properties.getProperty("baseURL", "https://www.bugaboo.com/us-en"); // Default to Bugaboo URL
-    }
+//    public boolean isHeadless() {
+//        return Boolean.parseBoolean(properties.getProperty("headless", "false")); // Default to false
+//    }
+//
+//
+//    public String getBaseURL() {
+//        return properties.getProperty("baseURL", "https://www.bugaboo.com/us-en"); // Default to Bugaboo URL
+//    }
 
 }

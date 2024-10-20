@@ -61,10 +61,5 @@ public class CreateAccountPage extends AbstractComponent {
         waitForElementVisible(errorMessage);
         return errorMessage.getText();
     }
-
-
-    public void createAccount(String tamara, String lazarovska, String s, String newEmail) {
-        //Zoshto mora ovaa metoda da se iskreira?
-    }
 }
 
