@@ -17,17 +17,18 @@ public class ConfigReader {
         }
     }
 
-    public static String getBrowser() {
+    public static String getChromeBrowser() {
         return properties.getProperty("browser", "chrome"); // Default to chrome if not specified
     }
+    public static String getEdgeBrowser() {
+        return properties.getProperty("browser", "edge"); // Default to chrome if not specified
+    }
+    public static String getFirefoxBrowser() {
+        return properties.getProperty("browser", "firefox"); // Default to chrome if not specified
+    }
 
-//    public boolean isHeadless() {
-//        return Boolean.parseBoolean(properties.getProperty("headless", "false")); // Default to false
-//    }
-//
-//
-//    public String getBaseURL() {
-//        return properties.getProperty("baseURL", "https://www.bugaboo.com/us-en"); // Default to Bugaboo URL
-//    }
+    public static String getBaseURL() {
+        return properties.getProperty("baseURL");
+    }
 
 }

@@ -37,11 +37,11 @@ public class BaseTest {
         configReader = new ConfigReader(System.getProperty("user.dir") + "/src/main/resources/config_chrome.properties");
     }
 
-    public WebDriver initializeDriver() throws IOException {
+    public WebDriver initializeDriver(String browser) throws IOException {
         logger.info("Initializing the WebDriver");
 
         // Get browser name from ConfigReader
-        String browserName = configReader.getBrowser();
+        String browserName = browser;
 //        String browserName = System.getProperty("browser") != null ? System.getProperty("browser") : properties.getProperty("browser");
         logger.info("Browser selected: {}", browserName);
 
@@ -62,8 +62,12 @@ public class BaseTest {
         }
 
         driver = browserUtility.getDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        int implicitWait = Integer.parseInt(properties.getProperty("implicitWait", "10"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
+        String windowSize = properties.getProperty("windowSize", "maximize");
+        if ("maximize".equalsIgnoreCase(windowSize)) {
+            driver.manage().window().maximize();
+        }
         logger.info("WebDriver initialized and window maximized");
         return driver;
     }
@@ -95,7 +99,7 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public LogInPage launchApplication() throws IOException {
         logger.info("Launching application");
-        driver = initializeDriver();
+        driver = initializeDriver(ConfigReader.getChromeBrowser());
         logInPage = new LogInPage(driver);
         createAccountPage = new CreateAccountPage(driver);
         logInPage.goTo();

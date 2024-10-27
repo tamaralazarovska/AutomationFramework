@@ -21,7 +21,7 @@ public class HelpersMethods {
 
     public static String generateRandomEmail(){
         String email = "tamara_@";
-        String number = generateRandomNumber(3);
+        String number = generateRandomNumber(4);
         email = email.concat(number).concat("mail.com");
         return email;
     }

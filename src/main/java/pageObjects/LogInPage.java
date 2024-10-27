@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.AbstractComponent;
 
+import static configs.ConfigReader.getBaseURL;
+
 
 public class LogInPage extends AbstractComponent {
 
@@ -33,7 +35,6 @@ public class LogInPage extends AbstractComponent {
     private WebElement errorMessage;
 
     public void login(String email, String password){
-        //Kako Account Page
        userEmail.sendKeys(email);
        userPassword.sendKeys(password);
        rememberMeBtn.click();
@@ -50,7 +51,7 @@ public String getErrorMessage(){
 
     public void goTo()
     {
-        driver.get("https://www.bugaboo.com/us-en/login/");
+        driver.get(getBaseURL());
     }
 
 

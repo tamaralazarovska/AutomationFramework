@@ -16,10 +16,11 @@
                     <include name="logInTest"/>
                 </methods>
             </class>
-        </classes>
-    </test>
-    <test name="ErrorValidationTests">
-        <classes>
+            <class name="WishlistTest">
+                <methods>
+                    <include name="addToWishlistTest"/>
+                </methods>
+            </class>
             <class name="ErrorValidations">
                 <methods>
                     <include name="errorLogInTest"/>
