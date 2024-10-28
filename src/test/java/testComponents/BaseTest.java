@@ -82,6 +82,7 @@ public class BaseTest {
     public List<HashMap<String, String>> loadCreateAccountData(String filePath) throws IOException {
         logger.info("Loading account creation data from: {}", filePath);
         String jsonContent = FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
+        //String to HashMap - Jackson Databind
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(jsonContent, new TypeReference<List<HashMap<String, String>>>() {});
     }

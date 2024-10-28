@@ -19,7 +19,6 @@ import static testComponents.Listeners.extentTest;
 
 @Listeners(testComponents.Listeners.class)
 public class ErrorValidations extends BaseTest {
-    private ExtentReports extent;
     WebDriverWait wait;
 
     @Test(priority = 1, groups = {"ErrorHandling"}, testName = "Negative scenario for log in", retryAnalyzer = Retry.class)

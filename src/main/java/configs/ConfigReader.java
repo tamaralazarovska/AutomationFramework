@@ -18,13 +18,15 @@ public class ConfigReader {
     }
 
     public static String getChromeBrowser() {
-        return properties.getProperty("browser", "chrome"); // Default to chrome if not specified
+        return properties.getProperty("browser", "chrome");
     }
     public static String getEdgeBrowser() {
-        return properties.getProperty("browser", "edge"); // Default to chrome if not specified
+
+        return properties.getProperty("browser", "edge");
     }
     public static String getFirefoxBrowser() {
-        return properties.getProperty("browser", "firefox"); // Default to chrome if not specified
+
+        return properties.getProperty("browser", "firefox");
     }
 
     public static String getBaseURL() {

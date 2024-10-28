@@ -21,7 +21,6 @@ public class WishlistTest extends BaseTest {
 
     WishlistPage wishlistPage;
     WebDriverWait wait;
-    AbstractComponent abstractComponent;
     @BeforeMethod
     public void setup() {
         wishlistPage = new WishlistPage(driver);
