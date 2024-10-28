@@ -27,6 +27,8 @@ public class CreateAccountTest extends BaseTest {
         WebElement allowCookies = wait.until(ExpectedConditions.elementToBeClickable(By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")));
         allowCookies.click();
         extentTest.get().log(Status.INFO, "Creating account");
+        Severity severityLevel = Severity.CRITICAL;
+        extentTest.get().assignCategory(severityLevel.name());
         createAccountPage.createAccount(input.get("userName"),
                 input.get("userLastName"),
                 input.get("userPhoneNumber"),

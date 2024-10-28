@@ -86,6 +86,12 @@ public class BaseTest {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(jsonContent, new TypeReference<List<HashMap<String, String>>>() {});
     }
+    public enum Severity {
+        BLOCKER,
+        CRITICAL,
+        NORMAL,
+        MINOR
+    }
 
     public String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
         logger.info("Taking screenshot for test case: {}", testCaseName);

@@ -34,6 +34,7 @@ public void addToWishlistTest() {
         WebElement allowCookies = wait.until(ExpectedConditions.elementToBeClickable(By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")));
         allowCookies.click();
         extentTest.get().log(Status.INFO, "Declined cookie consent");
+        Severity severityLevel = Severity.CRITICAL;
 
         // Adding product to wishlist
         extentTest.get().log(Status.INFO, "Adding product to wishlist");

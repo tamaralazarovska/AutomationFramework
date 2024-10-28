@@ -29,6 +29,8 @@ public class LogInTest extends BaseTest {
         WebElement allowCookies = wait.until(ExpectedConditions.elementToBeClickable(By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")));
         allowCookies.click();
         extentTest.get().log(Status.INFO, "Login account");
+        Severity severityLevel = Severity.CRITICAL;
+        extentTest.get().assignCategory(severityLevel.name());
         logInPage.login(input.get("email"), input.get("password"));
         Assert.assertEquals("Account", logInPage.getLoginMessage());
         if ("Account".equalsIgnoreCase(logInPage.getLoginMessage()))
